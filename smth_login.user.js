@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         水木自动登陆
+// @name         水木自动登录
 // @namespace    https://github.com/doggeddog
 // @homepage     https://github.com/doggeddog/smth_scripts
 // @version      0.5
-// @description  水木社区不能保存登陆状态, 这个脚本用来自动登陆.
+// @description  水木社区不能保存登录状态, 这个脚本可以用来自动登录.
 // @author       doggeddog
 // @match        *.newsmth.net/*
 // @match        *.mysmth.net/*
