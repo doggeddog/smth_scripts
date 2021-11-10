@@ -2,11 +2,11 @@
 // @name         水木自动登录
 // @namespace    https://github.com/doggeddog
 // @homepage     https://github.com/doggeddog/smth_scripts
-// @version      0.6
+// @version      0.6.1
 // @description  水木社区不能保存登录状态, 这个脚本可以用来自动登录.
 // @author       doggeddog
-// @match        *.newsmth.net/*
-// @match        *.mysmth.net/*
+// @match        *://*.newsmth.net/*
+// @match        *://*.mysmth.net/*
 // @run-at       document-end
 // @grant        GM_setValue
 // @grant        GM_getValue
