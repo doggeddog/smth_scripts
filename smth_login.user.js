@@ -2,7 +2,7 @@
 // @name         水木自动登录
 // @namespace    https://github.com/doggeddog
 // @homepage     https://github.com/doggeddog/smth_scripts
-// @version      0.5
+// @version      0.6
 // @description  水木社区不能保存登录状态, 这个脚本可以用来自动登录.
 // @author       doggeddog
 // @match        *.newsmth.net/*
@@ -27,8 +27,10 @@
                 return
             }
             let params = new URLSearchParams(arg[0]);
-            GM_setValue('id', params.get("id"));
-            GM_setValue('passwd', params.get("passwd"));
+            if(params.get("id") && params.get("passwd")) {
+                GM_setValue('id', params.get("id"));
+                GM_setValue('passwd', params.get("passwd"));
+            }
         }, false);
 
         send.apply(this, arguments);
@@ -48,9 +50,12 @@ function doLogin() {
     }
 
     if (loginButton) {
-        id.value = GM_getValue('id');
-        passwd.value = GM_getValue('passwd');
-        if (id.value && passwd.value) {
+        var idSave = GM_getValue('id');
+        var passSave = GM_getValue('passwd');
+
+        if (idSave && passSave) {
+            id.value = idSave;
+            passwd.value = passSave;
             loginButton.click();
         }
     }
