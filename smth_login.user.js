@@ -2,7 +2,7 @@
 // @name         水木自动登录
 // @namespace    https://github.com/doggeddog
 // @homepage     https://github.com/doggeddog/smth_scripts
-// @version      0.6.1
+// @version      0.6.2
 // @description  水木社区不能保存登录状态, 这个脚本可以用来自动登录.
 // @author       doggeddog
 // @match        *://*.newsmth.net/*
@@ -10,9 +10,19 @@
 // @run-at       document-end
 // @grant        GM_setValue
 // @grant        GM_getValue
+// @grant        GM_deleteValue
 // ==/UserScript==
 
+function encrypt(input){
+    return btoa(input).replace(/=/g,'').split('').reverse().join('');
+}
+
+function decrypt(input){
+    return atob(input.split('').reverse().join(''));
+}
+
 (function (send) {
+    GM_deleteValue('passwd');
     XMLHttpRequest.prototype.send = function () {
         var arg = arguments;
         this.addEventListener("readystatechange", function () {
@@ -29,7 +39,7 @@
             let params = new URLSearchParams(arg[0]);
             if(params.get("id") && params.get("passwd")) {
                 GM_setValue('id', params.get("id"));
-                GM_setValue('passwd', params.get("passwd"));
+                GM_setValue('pass', encrypt(params.get("passwd")));
             }
         }, false);
 
@@ -51,11 +61,11 @@ function doLogin() {
 
     if (loginButton) {
         var idSave = GM_getValue('id');
-        var passSave = GM_getValue('passwd');
+        var passSave = GM_getValue('pass');
 
         if (idSave && passSave) {
             id.value = idSave;
-            passwd.value = passSave;
+            passwd.value = decrypt(passSave);
             loginButton.click();
         }
     }
