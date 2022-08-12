@@ -2,7 +2,7 @@
 // @name         水木保持登录
 // @namespace    https://github.com/doggeddog
 // @homepage     https://github.com/doggeddog/smth_scripts
-// @version      1.1
+// @version      1.2
 // @description  水木社区经常掉线, 这个脚本通过自动刷新保持登陆状态.
 // @author       doggeddog
 // @match        *://www.newsmth.net/*
@@ -11,6 +11,7 @@
 // @grant        GM_setValue
 // @grant        GM_getValue
 // @grant        GM_deleteValue
+// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
 function refresh() {
@@ -22,7 +23,13 @@ function refresh() {
         if (window.location.hostname == 'www.mysmth.net') {
             SESSION.update(true);
         } else if (window.location.hostname == 'm.mysmth.net') {
-            location.reload();
+            GM_xmlhttpRequest( {
+                method: "GET",
+                url: location.href,
+                onload: function(r) {
+                    console.log("refresh");
+                }
+            } );
         }
     }
 }
