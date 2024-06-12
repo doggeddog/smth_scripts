@@ -31,14 +31,14 @@ function refresh() {
 }
 
 function left() {
-    var x = document.querySelector("#body > div.t-pre > div.page > ul > li:nth-child(2) > ol > li:first-child > a");
+    var x = document.querySelector("ol.page-main > li:first-child > a");
     if (x) {
         x.click();
     }
 }
 
 function right() {
-    var x = document.querySelector("#body > div.t-pre > div.page > ul > li:nth-child(2) > ol > li:last-child > a");
+    var x = document.querySelector("ol.page-main > li:last-child > a");
     if (x) {
         x.click();
     }
