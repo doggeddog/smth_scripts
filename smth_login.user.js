@@ -32,12 +32,16 @@ function refresh() {
 
 function left() {
     var x = document.querySelector("#body > div.t-pre > div.page > ul > li:nth-child(2) > ol > li:first-child > a");
-    x.click();
+    if (x) {
+        x.click();
+    }
 }
 
 function right() {
     var x = document.querySelector("#body > div.t-pre > div.page > ul > li:nth-child(2) > ol > li:last-child > a");
-    x.click();
+    if (x) {
+        x.click();
+    }
 }
 
 function keyMapping() {
