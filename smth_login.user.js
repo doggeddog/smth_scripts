@@ -2,7 +2,7 @@
 // @name         水木保持登录
 // @namespace    https://github.com/doggeddog
 // @homepage     https://github.com/doggeddog/smth_scripts
-// @version      2.0
+// @version      2.0.1
 // @description  水木社区经常掉线, 这个脚本通过自动刷新保持登陆状态.
 // @author       doggeddog
 // @match        *://*.newsmth.net/*
