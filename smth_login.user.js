@@ -2,7 +2,7 @@
 // @name         水木保持登录
 // @namespace    https://github.com/doggeddog
 // @homepage     https://github.com/doggeddog/smth_scripts
-// @version      2.0.1
+// @version      2.2.1
 // @description  水木社区经常掉线, 这个脚本通过自动刷新保持登陆状态.
 // @author       doggeddog
 // @match        *://*.newsmth.net/*
@@ -12,6 +12,8 @@
 // @grant        GM_getValue
 // @grant        GM_deleteValue
 // @grant        GM_xmlhttpRequest
+// @downloadURL https://update.greasyfork.org/scripts/435274/%E6%B0%B4%E6%9C%A8%E4%BF%9D%E6%8C%81%E7%99%BB%E5%BD%95.user.js
+// @updateURL https://update.greasyfork.org/scripts/435274/%E6%B0%B4%E6%9C%A8%E4%BF%9D%E6%8C%81%E7%99%BB%E5%BD%95.meta.js
 // ==/UserScript==
 
 function refresh() {
@@ -34,6 +36,8 @@ function left() {
     var x = document.querySelector("ol.page-main > li:first-child > a");
     if (x) {
         x.click();
+    } else {
+        redirect(-1);
     }
 }
 
@@ -41,11 +45,31 @@ function right() {
     var x = document.querySelector("ol.page-main > li:last-child > a");
     if (x) {
         x.click();
+    } else {
+        redirect(1);
     }
+}
+
+function redirect(offset) {
+    // Get the current URL
+    const url = new URL(window.location.href);
+
+    // Get the current 'p' parameter, default to 1 if not present
+    let pageNum = parseInt(url.searchParams.get("p") || "1", 10);
+
+    // Increment the page number
+    url.searchParams.set("p", pageNum + offset);
+
+    // Redirect to the new URL
+    window.location.href = url.toString();
 }
 
 function keyMapping() {
     document.addEventListener("keydown", (event) => {
+        const url = window.location.href;
+        if (url.includes("post")) {
+            return;
+        }
         switch (event.key) {
             case "ArrowLeft":
                 left();
