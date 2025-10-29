@@ -2,7 +2,7 @@
 // @name         水木保持登录
 // @namespace    https://github.com/doggeddog
 // @homepage     https://github.com/doggeddog/smth_scripts
-// @version      2.2.1
+// @version      2.3.0
 // @description  水木社区经常掉线, 这个脚本通过自动刷新保持登陆状态.
 // @author       doggeddog
 // @match        *://*.newsmth.net/*
@@ -63,9 +63,17 @@ function redirect(offset) {
     // Redirect to the new URL
     window.location.href = url.toString();
 }
-
 function keyMapping() {
     document.addEventListener("keydown", (event) => {
+        // 如果当前聚焦在textarea或可编辑的元素中，阻止操作
+        if (document.activeElement && (
+            document.activeElement.tagName === "TEXTAREA" ||
+            document.activeElement.isContentEditable ||
+            document.activeElement.tagName === "INPUT"
+        )) {
+            return;
+        }
+
         const url = window.location.href;
         if (url.includes("post")) {
             return;
@@ -84,4 +92,3 @@ function keyMapping() {
 GM_setValue('refreshTime', Date.now());
 setInterval(refresh, 30000);
 keyMapping();
-
